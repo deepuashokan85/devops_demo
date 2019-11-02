@@ -1,0 +1,13 @@
+---
+
+  - name: install the latest version of Apache
+    yum:
+      name: httpd
+      state: latest
+    notify:
+      - start httpd
+
+  - name: Template a file to /var/www/html/index.html
+    template:
+      src: index.html
+      dest: /var/www/html/index.html
