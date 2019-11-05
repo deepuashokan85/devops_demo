@@ -49,7 +49,7 @@ depends_on = [aws_instance.test-inst]
 resource "aws_instance" "test-inst" {
   instance_type = "${var.instance_type}"
   ami           = "${var.ami}"
-  count         = 1
+  count         = 4
   key_name      = "demo-keypair"
   subnet_id     = "${var.subnet_id}"
   associate_public_ip_address = "${var.associate_public_ip_address}"
