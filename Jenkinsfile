@@ -28,7 +28,7 @@ pipeline {
                 expression { params.trigger == 'apply' }
                 }
              steps{
-                   sh script: "cd rhel; /usr/local/bin/terraform init; /usr/local/bin/terraform plan; /usr/local/bin/terraform apply -auto-approve"
+                   sh script: "cd terraform; /usr/local/bin/terraform init; /usr/local/bin/terraform plan; /usr/local/bin/terraform apply -auto-approve"
                }
             }
 
@@ -38,7 +38,7 @@ pipeline {
                 expression { params.trigger == 'destroy' }
                 }
              steps{
-                   sh script: "cd centos;  /usr/local/bin/terraform init; /usr/local/bin/terraform  destroy -auto-approve"
+                   sh script: "cd terraform;  /usr/local/bin/terraform init; /usr/local/bin/terraform  destroy -auto-approve"
                }
             }
             stage("Terraform GCP Destroy") {
@@ -47,7 +47,7 @@ pipeline {
                 expression { params.trigger == 'destroy' }
                 }
              steps{
-                   sh script: "cd rhel; /usr/local/bin/terraform init; /usr/local/bin/terraform  destroy -auto-approve"
+                   sh script: "cd terraform; /usr/local/bin/terraform init; /usr/local/bin/terraform  destroy -auto-approve"
                }
             }
 
