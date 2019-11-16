@@ -7,6 +7,7 @@ pipeline {
         choice(choices: ['aws','gcp'], description: '', name: 'cloud')
         choice(choices: ['apply','destroy'], description: '', name: 'trigger')
         string(name: 'instance', defaultValue: '0', description: 'instance count')
+        password(name: 'Password', description: 'Encryption key')
         }
 
 
