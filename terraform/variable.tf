@@ -9,4 +9,4 @@ variable sec1_id {}
 variable private_key_path {}
 variable username {}
 variable keypair {}
-variable value {}
+variable inst_cnt {}
