@@ -5,7 +5,7 @@ provider "aws" {
 resource "aws_instance" "web" {
   instance_type = "t2.micro"
   ami           = "ami-0520e698dd500b1d1"
-  count         = 1
+  count         = var.inst_cnt
   key_name      = "devops"
   security_groups = ["sg-8bd369e5"]
   subnet_id     = "subnet-21a8df5b"
