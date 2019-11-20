@@ -6,11 +6,10 @@ pipeline {
 
         choice(choices: ['aws','gcp'], description: '', name: 'cloud')
         choice(choices: ['apply','destroy'], description: '', name: 'trigger')
-        string(name: 'AWS_ACC_KEY', defaultValue: 'XXXXXXXX', description: 'Access Key')
-        password(name: 'AWS_Sec_Key', description: 'Encryption key')
+        string(name: 'AWS_ACCESS_KEY_ID', defaultValue: '', description: 'Access Key')
+        password(name: 'AWS_SECRET_ACCESS_KEY', description: 'Encryption key')
         
         }
-
 
     stages {
 
