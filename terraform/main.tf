@@ -1,58 +1,37 @@
 provider "aws" {
-  # Credentials to access aws cluster
-#  access_key = "${var.access_key}"
-#  secret_key = "${var.secret_key}"
-  region = "${var.region}"
+  region = var.region
 }
 
-data "aws_subnet_ids" "example" {
-  vpc_id = "vpc-4f61ec35"
-}
+resource "aws_instance" "web" {
+  instance_type = var.instance_type
+  ami           = var.ami
+  count         = var.count
+  key_name      = var.keypair
+  security_groups = [var.sec1_id]
+  subnet_id     = var.subnet_id
+  associate_public_ip_address = var.associate_public_ip_address
 
-#data "aws_subnet" "example" {
-#  count = "${length(data.aws_subnet_ids.example.ids)}"
-#  id    = "${data.aws_subnet_ids.example.ids[count.index]}"
-#}
-#
+  tags = {
+    Name = "web"
+  }
 
-resource "aws_lb" "test-lb" {
-  name = "test-lb-tf"
-  internal = false
-  load_balancer_type = "application"
-  subnets = [
-	"subnet-5f265971",
-	"subnet-07cbba60",
-	]	
-}
+connection {
+    host = aws_instance.web.0.public_ip
+    user = var.username
+    private_key   = file(var.private_key)
+  }
 
-resource "aws_lb_target_group_attachment" "test" {
-  target_group_arn = "${aws_lb_target_group.test.arn}"
-  target_id        = "${aws_instance.test-inst.0.id}"
-  port             = 80
-depends_on = [aws_lb_target_group.test,
-	     aws_instance.test-inst,]
+  provisioner "file" {
+    source        = "files/test.sh"
+    destination   = "/tmp/test.sh"
 
-}
+  }
 
-
-resource "aws_lb_target_group" "test" {
-  name     = "tf-example-lb-tg"
-  port     = 80
-  protocol = "HTTP"
-  target_type = "instance"
-  vpc_id   = "vpc-4f61ec35"
-depends_on = [aws_instance.test-inst]
-}
-
-
-
-resource "aws_instance" "test-inst" {
-  instance_type = "${var.instance_type}"
-  ami           = "${var.ami}"
-  count         = 4
-  key_name      = "demo-keypair"
-  subnet_id     = "${var.subnet_id}"
-  associate_public_ip_address = "${var.associate_public_ip_address}"
-
+ provisioner "remote-exec" {
+    inline = [
+      "sudo chmod +x /tmp/test.sh",
+      "sudo bash -c /tmp/test.sh"
+    ]
+  }
 }
 
