@@ -20,7 +20,7 @@ pipeline {
                 expression { params.trigger == 'apply' }
                 }
              steps{
-                   sh script: "/usr/local/bin/consul-template -template "terraform/terraform.tfvars.tmpl:terraform/terraform.tfvars"
+                   sh script: "/usr/local/bin/consul-template -template "terraform/terraform.tfvars.tmpl:terraform/terraform.tfvars" -once"
                    sh script: "cd terraform; /usr/local/bin/terraform init; /usr/local/bin/terraform plan; /usr/local/bin/terraform apply -auto-approve"
                }
             }
