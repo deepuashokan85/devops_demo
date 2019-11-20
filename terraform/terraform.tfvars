@@ -2,6 +2,6 @@
 #secret_key = ""
 region = "us-east-1"
 instance_type = "t2.micro"
-ami = "ami-0c322300a1dd5dc79"
+ami = "ami-0520e698dd500b1d1"
 associate_public_ip_address = "true"
-subnet_id =  "subnet-5f265971"
+subnet_id =  "subnet-21a8df5b"
