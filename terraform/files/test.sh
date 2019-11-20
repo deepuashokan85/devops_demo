@@ -2,4 +2,4 @@
 
 sudo yum install -y httpd
 sudo systemctl start httpd
-sudo echo "WELCOME TO BITS" > /var/www/html/index.html
+sudo echo "WELCOME TO BITS PILANI" > /var/www/html/index.html
