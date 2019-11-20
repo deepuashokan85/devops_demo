@@ -1,11 +1,12 @@
 #variable access_key {}
 #variable secret_key {}
 variable region {}
-variable instance_type {}
+variable instance {}
 variable ami {}
 variable associate_public_ip_address {}
 variable subnet_id {}
 variable sec1_id {}
-variable private_key {}
+variable private_key_path {}
 variable username {}
 variable keypair {}
+variable value {}
