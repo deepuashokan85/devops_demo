@@ -8,6 +8,7 @@ pipeline {
         choice(choices: ['apply','destroy'], description: '', name: 'trigger')
         string(name: 'AWS_ACCESS_KEY_ID', defaultValue: '', description: 'Access Key')
         password(name: 'AWS_SECRET_ACCESS_KEY', description: 'Encryption key')
+        string(name: 'inst_count', defaultValue: '0', description: 'Instance Count')
         
         }
 
@@ -19,7 +20,7 @@ pipeline {
                 expression { params.trigger == 'apply' }
                 }
              steps{
-
+    
                    sh script: "cd terraform; /usr/local/bin/terraform init; /usr/local/bin/terraform plan; /usr/local/bin/terraform apply -auto-approve"
                }
             }
